@@ -1,6 +1,6 @@
 package Deque;
-import MyUtils.EmptyQueueException;
 
+import MyUtils.EmptyQueueException;
 import java.util.Iterator;
 
 public interface DequeInterface<T> extends Iterable<T>{

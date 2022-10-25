@@ -1,50 +1,47 @@
 package StockLedger;
 
-import java.util.ArrayList;
+import MyUtils.EmptyQueueException;
+import java.util.*;
+
 
 public class StockLedger implements StockLedgerInterface{
 
-    private ArrayList<LedgerEntry> Ledger = new ArrayList<>();
-    /**
-     * Records a stock purchase in this ledger.
-     *
-     * @param stockSymbol   The stock's symbol.
-     * @param sharesBought  The number of shares purchased.
-     * @param pricePerShare The price per share.
-     */
-    public void buy(String stockSymbol, int sharesBought, double pricePerShare) {
+    private ArrayList<LedgerEntry> ledger = new ArrayList<>();
+
+
+
+    public void buy(String stockSymbol, int sharesBought, double pricePerShare){
+        //Creates the stocks purchased
+        StockPurchase stock = new StockPurchase(stockSymbol, sharesBought, pricePerShare);
+
+        //checks if the stock already exists in the ledger
+        if(!contains(stockSymbol)) {
+            //creates an LedgerEntry instance
+            ledger.add(new LedgerEntry(stockSymbol));
+        }
+        ledger.get(ledger.indexOf(stock)).addPurchasedStocks(stock, stock.getSharesBought());
+
 
     }
 
-    /**
-     * Removes from this ledger any shares of a particular stock
-     * that were sold and computes the capital gain or loss.
-     *
-     * @param stockSymbol   The stock's symbol.
-     * @param sharesSold    The number of shares sold.
-     * @param pricePerShare The price per share.
-     * @return The capital gain (loss).
-     */
+
     public double sell(String stockSymbol, int sharesSold, double pricePerShare) {
         return 0;
     }
 
-    /**
-     * Returns a boolean on whether the passed in stock symbol is contained in the ledger.
-     *
-     * @param stockSymbol The stock's symbol.
-     * @return Boolean of if the stock exists in the ledger.
-     */
+
     public boolean contains(String stockSymbol) {
+        //loops through the ArrayList containing each ledger entry
+        for(int i = 0; i < ledger.size(); i++){
+            //checks if the stock exists in the ledger
+            if(Objects.equals(ledger.get(i).getStockSymbol(), stockSymbol)){
+                return true;
+            }
+        }
         return false;
     }
 
-    /**
-     * Returns a StockLedger.StockLedger.LedgerEntry object based on stock symbol.
-     *
-     * @param stockSymbol The stock's symbol.
-     * @return StockLedger.StockLedger.LedgerEntry object of stock symbol.
-     */
+
     public LedgerEntry getEntry(String stockSymbol) {
         return null;
     }

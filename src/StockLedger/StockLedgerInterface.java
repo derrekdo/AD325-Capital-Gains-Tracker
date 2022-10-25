@@ -1,12 +1,14 @@
 package StockLedger;
 
+import MyUtils.EmptyQueueException;
+
 public interface StockLedgerInterface<T> {
 
     /** Records a stock purchase in this ledger.
      @param stockSymbol    The stock's symbol.
      @param sharesBought   The number of shares purchased.
      @param pricePerShare  The price per share. */
-    public void buy(String stockSymbol, int sharesBought, double pricePerShare);
+    public void buy(String stockSymbol, int sharesBought, double pricePerShare) throws EmptyQueueException;
 
     /** Removes from this ledger any shares of a particular stock
      that were sold and computes the capital gain or loss.
@@ -21,8 +23,8 @@ public interface StockLedgerInterface<T> {
      @return  Boolean of if the stock exists in the ledger. */
     public boolean contains(String stockSymbol);
 
-    /** Returns a StockLedger.StockLedger.LedgerEntry object based on stock symbol.
+    /** Returns a LedgerEntry object based on stock symbol.
      @param stockSymbol    The stock's symbol.
-     @return  StockLedger.StockLedger.LedgerEntry object of stock symbol. */
+     @return  LedgerEntry object of stock symbol. */
     public LedgerEntry getEntry(String stockSymbol);
 }
