@@ -62,10 +62,15 @@ public class LinkedDeque<T>implements DequeInterface<T>{
         }
         //variable containing data at front of deque
         T removed = first.getData();
-        //front node now equals null
-        first.setData(null);
-        //first points to the next node in the deque
-        first = first.getNext();
+        //if next node is null clears the deque
+        if(first.getNext() == null){
+            clear();
+        }else {
+            //front node now equals null
+            first.setData(null);
+            //first points to the next node in the deque
+            first = first.getNext();
+        }
         size--;
         return removed;
     }
@@ -78,11 +83,16 @@ public class LinkedDeque<T>implements DequeInterface<T>{
         }
         //variable containing data at back of deque
         T removed = last.getData();
-        //last points to the previous node
-        last = last.getPrev();
-        //makes next node null
-        last.setNext(null);
-        size--;
+        //if prev node is null, clears deque
+        if(last.getPrev() == null){
+            clear();
+        }else{
+            //last points to the previous node
+            last = last.getPrev();
+            //makes next node null
+            last.setNext(null);
+        }
+            size--;
         return removed;
     }
 
@@ -124,29 +134,26 @@ public class LinkedDeque<T>implements DequeInterface<T>{
     }
 
     public Iterator<T> iterator() {
-        return new IteratorForLinkedList();
+        return new IteratorForLinkedList(first);
     }
 
     public Iterator<T> getIterator() {
         return iterator();
     }
 
-    public void display() throws EmptyQueueException {
+    //String form of the deque
+    public String toString(){
         if(isEmpty()){
-            throw new EmptyQueueException("Empty Deque");
+            return "[]";
         }
-
         DLNode<T> temp = first;
-        System.out.print("[");
-
-        while(temp !=null){
-            System.out.print(temp.getData());
-            if(temp.next != null){
-                System.out.print(", ");
-            }
+        StringBuilder result = new StringBuilder("[" + temp.data);
+        temp = temp.next;
+        while(temp != null){
+            result.append(", " + temp.data);
             temp = temp.next;
         }
-        System.out.print("]\n");
+        return result + "]";
     }
 
     private static class DLNode<T>{
@@ -192,14 +199,13 @@ public class LinkedDeque<T>implements DequeInterface<T>{
 
     }
 
-    private class IteratorForLinkedList implements Iterator<T>{
+    public static class IteratorForLinkedList<T> implements Iterator<T>{
         private DLNode<T> nextNode;
-        private boolean removed;
 
-        public IteratorForLinkedList(){
-            nextNode = first;
-            removed = false;
+        public IteratorForLinkedList(DLNode<T> node){
+            nextNode = node;
         }
+
         public boolean hasNext() {
             return nextNode != null;
         }
@@ -215,6 +221,10 @@ public class LinkedDeque<T>implements DequeInterface<T>{
             }
 
             return data;
+        }
+
+        public T current(){
+            return nextNode.getData();
         }
     }
 }
