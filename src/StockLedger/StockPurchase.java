@@ -5,6 +5,11 @@ public class StockPurchase {
     private int sharesBought;
     private double pricePerShare;
 
+    /**
+     * Default constructor for the stock
+     * @param stockSymbol the name of this stock
+     * @param pricePerShare the current buy price
+     */
     public StockPurchase(String stockSymbol, int sharesBought, double pricePerShare){
         this.stockSymbol = stockSymbol;
         this.sharesBought = sharesBought;
@@ -12,12 +17,20 @@ public class StockPurchase {
     }
 
     /**
-     * returns the amounts of shares bought
-     * @return sharesBought
+     * lowers the total shares by 1
      */
-    public int getSharesBought(){
+    public void setShares(){
+        this.sharesBought += -1;
+    }
+
+    /**
+     * getter for the shares bought and price per
+     * @return sharesBought and pricePerShare
+     */
+    public int getShares(){
         return sharesBought;
     }
+
     public double getPricePerShare(){
         return pricePerShare;
     }
