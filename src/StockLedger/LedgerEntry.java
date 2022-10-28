@@ -65,6 +65,9 @@ public class LedgerEntry {
 
     //String representation of the Ledger Entry
     public String toString() {
+        if(deque.isEmpty()){
+            return stockSymbol + ": Empty Ledger";
+        }
         //iterator for the deque
         Iterator<StockPurchase> iterator = deque.getIterator();
         //temporary stock to pull data out

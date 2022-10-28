@@ -24,6 +24,7 @@ public class Main {
         System.out.println("Profit: " + derksLedger.sell("AAPL", 10, 65));
 //        derksLedger.sell("AAPL", 10, 65);
         System.out.println("---- Stock Ledger ----");
+        System.out.println(derksLedger.getEntry("AAPL"));
         System.out.println(derksLedger.getEntry("MSFT"));
 
         System.out.println();
