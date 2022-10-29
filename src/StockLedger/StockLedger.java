@@ -3,7 +3,9 @@ package StockLedger;
 import MyUtils.EmptyQueueException;
 import java.util.*;
 
-
+/**
+ * {@inheritDoc}
+ */
 public class StockLedger implements StockLedgerInterface{
 
     private ArrayList<LedgerEntry> ledger = new ArrayList<>();
