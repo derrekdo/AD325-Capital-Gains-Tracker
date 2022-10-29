@@ -62,7 +62,6 @@ public class LedgerEntry {
         return stockSymbol;
     }
 
-
     //String representation of the Ledger Entry
     public String toString() {
         if(deque.isEmpty()){
